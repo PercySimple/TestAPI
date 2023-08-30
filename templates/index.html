@@ -10,7 +10,11 @@
     <form method="post" action="{{ url_for('math_func') }}">
       <input type="text" name="x" placeholder="Enter matrix size:" required="required" />
       <input type="text" name="n" placeholder="Enter seed value:" required="required" />
-      <input type="text" name="operation" placeholder="Dot product / Trace value" required="required" />
+      <br/>
+      <select id="operation" name="operation">
+        <option value="Dot product">Dot product</option>
+        <option value="Trace value">Trace value</option>
+      </select>
       <button type="submit" class="btn btn-primary btn-block btn-large">Calculate</button>
     </form>
 
