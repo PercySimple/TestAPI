@@ -18,6 +18,31 @@
       <button type="submit" class="btn btn-primary btn-block btn-large">Calculate</button>
     </form>
 
+    <script>
+      const formEl = document.querySelector('form');
+
+      formEl.addEventListener('submit', event => {
+        event.preventDefault();
+
+        const data = new FormData(event.target);
+        const matrixSize = data.get('x');
+        const seed = data.get('n');
+        const jsonData = {
+          'matrixSize' : matrixSize,
+          'seed' : seed          
+        };
+        
+        fetch('https://reqres.in/api/users', {
+          method: 'POST',
+          headers: {
+            'Content-Type' : 'application/json'
+          },
+          body: JSON.stringify(jsonData)
+        }).then(res => res.json())
+          .then(data => console.log(data))
+          .catch(error => console.log(error))
+      });
+    </script>
     <br>
     <br>
     {{ result_text }}
