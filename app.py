@@ -1,28 +1,16 @@
 import numpy as np
-import json
 import time
 
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, request, jsonify
 
 app = Flask(__name__)
-
-@app.route("/")
-def home():
-  return render_template('index.html')
-
-'''@app.route("/math_func", methods = ['POST'])
-def math_func():
-  x = request.form['x']
-  n = request.form['n']
-  operation = str(request.form['operation'])
-  result = matrix_calc(x, n, operation)
-  return render_template('index.html', result_text = str(result))'''
 
 @app.route("/api/math_func", methods = ['POST'])
 def process_json():
   st = time.time()
-  with open('input_data.json', 'r') as json_file :
-    json_data = json.load(json_file)
+  content_type = request.headers.get('Content-Type')
+  if (content_type == 'application/json'):
+    json_data = request.json
     id = int(json_data["id"])
     x = int(json_data["file"]["matrixSize"])
     n = int(json_data["file"]["seed"])
@@ -40,7 +28,9 @@ def process_json():
     }
     
     return jsonify(output_dict)
+  else:
+    return 'Content-Type not supported!'
   
   
 if __name__ == '__main__':
-  app.run(host='0.0.0.0',debug=True, threaded=True)
+  app.run(host='0.0.0.0', debug=True, threaded=True)
