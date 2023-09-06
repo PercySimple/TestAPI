@@ -9,7 +9,6 @@ logging.config.fileConfig('logging.ini', disable_existing_loggers=False)
 # Get a logger for our module
 log = logging.getLogger(__name__)
 
-
 app = Flask(__name__)
 
 @app.route("/")
@@ -17,11 +16,12 @@ def hello():
     log.info("Hello")
     log.debug("GET /")
     try:
-        return("""Hello everynyan!
+        return("""Herro everynyan!
     How aa you?
     Fine, Sank you.
     Aah!
     OH MAH GAWH!
+    Uhh I wish I were a bird.
     """)
     except RuntimeError:
         log.exception("An exception occurred while displaying the webpage.")

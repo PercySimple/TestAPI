@@ -1,19 +1,9 @@
-networks:
-  frontend:
-  backend:
-
 services:
+  testapi:
+    build: .
+
   web:
     build: nginx
     ports:
       - "80:80"
-    networks:
-      - frontend
-  webservice:
-    build: .
-    networks:
-      - frontend
-      - backend
-    volumes:
-      - "./config:/config"
-      - "./TestAPI/src:/code"
+
