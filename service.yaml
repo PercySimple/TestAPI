@@ -1,0 +1,33 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: test-app
+  labels:
+    app: testapi-testapi
+spec:
+  containers:
+  - name: testapi-testapi
+    image: percysimple/iwebmath-testapi:v1.0
+    resources:
+      limits:
+        cpu: "0.5"
+      requests:
+        cpu: "0.5"
+    args:
+    - -cpus
+    - "2"
+    ports:
+    - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-app-deployment
+spec:
+  selector:
+    app: testapi-testapi
+  ports:
+  - port: 80
+    targetPort: 3000
+    protocol: TCP
+  type: LoadBalancer

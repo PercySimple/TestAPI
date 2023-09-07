@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-app-deployment
+  labels:
+    app: testapi-testapi
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: testapi-testapi
+  template:
+    metadata:
+      labels:
+        app: testapi-testapi
+    spec:
+      containers:
+      - name: testapi-testapi
+        image: percysimple/iwebmath-testapi:v1.0
+        resources:
+          limits:
+            cpu: "0.5"
+        requests:
+            cpu: "0.5"
+        args:
+        - -cpus
+        - "2"
+        ports:
+        - containerPort: 3000

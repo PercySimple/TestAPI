@@ -11,22 +11,6 @@ log = logging.getLogger(__name__)
 
 app = Flask(__name__)
 
-@app.route("/")
-def hello():
-    log.info("Hello")
-    log.debug("GET /")
-    try:
-        return("""Herro everynyan!
-    How aa you?
-    Fine, Sank you.
-    Aah!
-    OH MAH GAWH!
-    Uhh I wish I were a bird.
-    """)
-    except RuntimeError:
-        log.exception("An exception occurred while displaying the webpage.")
-        return "An exception occurred while displaying the webpage.", 400
-
 @app.route("/math_func", methods = ['POST'])
 def process_json():
   log.debug(f"POST /math_func")
